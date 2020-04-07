@@ -1,0 +1,28 @@
+{% extends 'blog_app/base.html'%}
+
+
+{% block body_block %}
+
+<div class="listposts">
+
+<!-- make sure to specify it as post_list itself as django will be looking for this particular variable and html page as default for the listview. -->
+ {% for post in post_list%}
+   <!-- in url tagging no need to specify the app name as all the links for the views are through the urls in blog_app -->
+   <!-- specify the pk so that the respective post_detail is displayed -->
+   <h2><a href="{% url 'post_detail' pk=post.pk%}">title:{{post.title}}</a></h2>
+   <div class="date">
+     <p>Created on:{{post.create_date|date:"D M Y"}}</p>
+     <p>Author:{{post.author}}</p>
+   </div>
+
+   <div>
+     <!-- here for the Comments the approve_comments method is called and count attribute is applied so that it displays the no of comments for each post -->
+     <a href="{% url 'post_detail' pk=post.pk%}">Comments: {{post.approve_comments.count}}</a>
+   </div>
+ {% endfor %}
+
+
+</div>
+
+
+{% endblock %}

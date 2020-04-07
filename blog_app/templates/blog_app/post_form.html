@@ -1,0 +1,20 @@
+{% extends 'blog_app/base.html'%}
+ <!-- this page is one of the default pages which django searches for while creating view -->
+
+{% block body_block %}
+<h1>New post</h1>
+
+  <form method="POST" class="post-form">
+  {% csrf_token %}
+  {{form.as_p}}
+   <!-- <strong>Author:</strong><input type="text" name="author" value="{{user.username}}"> -->
+   <hr>
+  <button type="submit" class="btn btn-warning">Save</button>
+  </form>
+
+<!-- the js script variables have to be declared here for the medium editor to work as per the docs -->
+<!-- the editable class is also declared in froms.py as widget -->
+  <script>var editor = new MediumEditor('.editable');</script>
+
+
+{% endblock %}

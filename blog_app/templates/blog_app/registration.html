@@ -1,0 +1,38 @@
+{% extends 'blog_app/base.html'%}
+{% load static %}
+
+{% block body_block %}
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{% static "css/login.css"%}">
+<!-- <link rel="stylesheet" href="C:\Users\prajv\Desktop\PycharmProjects\PS-PY\venv\djenv\blog_pro\blog_app\static\css\login.css"> -->
+<script src="{% static 'js/login.js'%}"></script>
+<!-- <script src="C:\Users\prajv\Desktop\PycharmProjects\PS-PY\venv\djenv\blog_pro\blog_app\static\js\login.js"></script> -->
+
+
+<div class="container">
+  <div class="frame">
+    <div class="nav">
+      <ul class"links">
+        {% if registered %}
+          <h1>Thank you for registering!</h1>
+        {% else %}
+        <li class="signin-inactive"><a class="btn" href="{%url 'user_login'%}" >Sign in</a></li>
+        <li class="signup-active"><a class="btn" href="{%url 'register'%}">Sign up </a></li>
+      </ul>
+    </div>
+      <div ng-app ng-init="checked = false">
+        <form class="form-signup" action="" method="post" name="form">
+            {% csrf_token %}
+        <label for="fullname">Username</label>
+        <input class="form-styling" type="text" name="username" placeholder=""/>
+        <label for="email">Email</label>
+        <input class="form-styling" type="text" name="email" placeholder=""/>
+        <label for="password">Password</label>
+        <input class="form-styling" type="password" name="password" placeholder=""/>
+        <label for="confirmpassword">Confirm password</label>
+        <input class="form-styling" type="password" name="verify_pass" placeholder=""/>
+        <!-- <a ng-click="checked = !checked" class="btn-signup">Sign Up</a> -->
+        <input type="submit" name="" value="Sign Up" class="btn-signup">
+              </form>
+          {%endif%}
+{% endblock %}

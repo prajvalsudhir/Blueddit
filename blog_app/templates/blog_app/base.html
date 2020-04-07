@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>REDDIT_2.0</title>
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+      <!-- custom css -->
+    <link rel="stylesheet" href="{% static "css/blog.css" %}">
+    <!-- <link rel="stylesheet" href="C:\Users\prajv\Desktop\PycharmProjects\PS-PY\venv\djenv\blog_pro\blog_app\static\css\blog.css"> -->
+
+    <!-- custom js -->
+    <script src="{% static 'js/blog.js' %}"></script>
+    <!-- <script src="C:\Users\prajv\Desktop\PycharmProjects\PS-PY\venv\djenv\blog_pro\blog_app\static\js\blog.js"></script> -->
+
+
+    <!-- medium style editor -->
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+    <!-- Fonts -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat|Russo+One" rel="stylesheet"> -->
+
+  </head>
+  <body>
+<body class="hero-anime">
+	<div class="navigation-wrap bg-light start-header start-style">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav class="navbar navbar-expand-md navbar-light">
+
+						<a class="navbar-brand" href="https://themeforest.net/user/ig_design/portfolio" target="_blank"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/logo.svg" alt=""></a>
+
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav ml-auto py-4 py-md-0">
+								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="{%url 'about' %}">About</a>
+										<a class="dropdown-item" href="#">Something else here</a>
+										<a class="dropdown-item" href="#">Another action</a>
+									</div>
+								</li>
+								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+									<a class="nav-link" href="{% url 'post_list'%}">POSTS</a>
+								</li>
+								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Services</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="https://github.com/prajvalsudhir">Github</a>
+										<a class="dropdown-item" href="https://in.linkedin.com/in/prajval-sudhir-571833185">LinkedIn</a>
+										<a class="dropdown-item" href="#">Something else here</a>
+										<a class="dropdown-item" href="#">Another action</a>
+									</div>
+								</li>
+                {% if user.is_authenticated %}
+								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+									<a class="nav-link" href="{% url 'post_create' %}">NewPost</a>
+								</li>
+                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+              <!-- user object which is automatically created is given as primary key(pk) to get the individual user posts -->
+                  <a class="nav-link" href="{%url 'Ulist' pk=user.pk%}">My Posts</a>
+                </li>
+								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+								<a class="nav-link" href="{% url 'user_logout' %}">Logout</a>
+								</li>
+                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+                <strong><a class="nav-link" >Welcome: {{ user.username }}</a></strong>
+                </li>
+                {% else %}
+                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+                  <a class="nav-link" href="{% url 'register' %}">Register</a>
+                  </li>
+                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+                  <a class="nav-link" href="{% url 'user_login' %}" aria-label="Login">Login</a>
+                  </li>
+                {% endif %}
+							</ul>
+						</div>
+
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+
+
+
+{# The actual blog posts#}
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                  <div class="blog_posts">
+                    {% block body_block %}
+                    {% endblock %}
+
+                  </div>
+                </div>
+            </div>
+        </div>
+
+
+  </body>
+</html>
