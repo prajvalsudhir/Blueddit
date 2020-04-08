@@ -19,7 +19,9 @@
    <!-- add a filter to the post so that only the text content is displayed(because of the medium functionality) -->
     <p class='postcontent' >{{ post.text|safe|linebreaksbr }}</p>
 
-    {% if user.is_authenticated %}
+    <!-- only the post creators can edit the posts -->
+    {%if user.is_authenticated and user.username == post.creator %}
+
     <!-- the update view and delete view are used here and respective pk is sent -->
          <a class="btn btn-primary" href="{% url 'post_update' pk=post.pk %}"><span class="fa fa-pencil">Edit</span></a>
          <a class="btn btn-primary" href="{% url 'post_remove' pk=post.pk %}"><span class="fa fa-remove">Delete</span></a>
@@ -31,7 +33,7 @@
 <div class="container">
 
 <!-- make sure to use a loop to display all the entries -->
-<!-- comments is declared as a related name in comment model with foreign key='post'so it is usable -->
+<!-- 'comments' is declared as a related name in comment model with foreign key='post'so it is usable -->
  {% for comm in post.comments.all %}
  <br>
      {% if comm.approved_comm %}
@@ -42,7 +44,8 @@
          <p>Posted by: <strong>{{ comm.author }}</strong></p>
 
      {% endif %}
-     {% if comm.approved_comm %}
+     <!-- making sure only the post creators can remove the comments -->
+     {% if comm.approved_comm and user.username == post.creator %}
          <a class="btn btn-primary" href="{% url 'com_reject' pk=comm.pk %}"><span class="fa fa-remove">remove</span></a>
 
      {% endif %}
