@@ -4,15 +4,28 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 # Create your models here.
 
+class userinfo(models.Model):
+    # we are creating this user field to have a 1-1 mapping for individual users and their profile pic and bio
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('Upost_list', kwargs={'pk': self.pk})
+
+    def __str__(self):
+        return self.user.username
+
+
+
 class post(models.Model):
     # foreign keys are created to connect one model to another ex:connect the comment to the post model
     #here the foreign key for author is connected to auth.User as only authorised(registered users) can ccreate the posts
     # author = models.ForeignKey('auth.User',on_delete=models.CASCADE)
-    author = models.ForeignKey('auth.User', on_delete=models.CASCADE,null=True,default='user.username')
+    author = models.ManyToManyField(userinfo)
     title = models.CharField(max_length=200)
     text = models.TextField()
     create_date = models.DateField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
+    creator = models.TextField(max_length=50)
 
     def publish(self):
         self.published_date = timezone.now()
@@ -53,16 +66,16 @@ class comment(models.Model):
     def __str__(self):
         return self.text
 
-
-class userinfo(models.Model):
-    # we are creating this user field to have a 1-1 mapping for individual users and their profile pic and bio
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    def get_absolute_url(self):
-        return reverse('Upost_list', kwargs={'pk': self.pk})
-
-    def __str__(self):
-        return self.user.username
+#
+# class userinfo(models.Model):
+#     # we are creating this user field to have a 1-1 mapping for individual users and their profile pic and bio
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#
+#     def get_absolute_url(self):
+#         return reverse('Upost_list', kwargs={'pk': self.pk})
+#
+#     def __str__(self):
+#         return self.user.username
 
 
 

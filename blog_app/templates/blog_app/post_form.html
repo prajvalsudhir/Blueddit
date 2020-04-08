@@ -4,17 +4,25 @@
 {% block body_block %}
 <h1>New post</h1>
 
-  <form method="POST" class="post-form">
+  <form method="POST" class="post-form" name="form">
   {% csrf_token %}
-  {{form.as_p}}
+    <!-- {{form.as_p}} -->
+  <h3>Creator<input readonly class="form-control" type="text" name="creator" value="{{user.username}}"></h3>
+  <h3>Title<input class="form-control" type="text" name="title"></h3>
+  <!-- <h3>Text<input class="form-control" type="text" name="text"></h3> -->
+  <h3>Text<textarea  class="form-control" name="text" rows="10" cols="100"></textarea></h3>
+  <!-- <input type="submit" name="" value="Save" class="btn btn-warning"> -->
    <!-- <strong>Author:</strong><input type="text" name="author" value="{{user.username}}"> -->
    <hr>
+  <!-- <input type="submit" name="" value="Save" class="btn btn-warning"> -->
   <button type="submit" class="btn btn-warning">Save</button>
   </form>
 
 <!-- the js script variables have to be declared here for the medium editor to work as per the docs -->
 <!-- the editable class is also declared in froms.py as widget -->
-  <script>var editor = new MediumEditor('.editable');</script>
+  <script>var editor = new MediumEditor('.editarea');</script>
 
 
 {% endblock %}
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

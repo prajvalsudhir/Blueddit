@@ -33,7 +33,7 @@ class postdetailview(DetailView):
     model = post
 
 
-#login required mixin is used so only users logged in can create posts
+# # login required mixin is used so only users logged in can create posts
 class postcreateview(LoginRequiredMixin,CreateView):
     login_url = '/login/'
     # to redirect after post creation
@@ -43,6 +43,30 @@ class postcreateview(LoginRequiredMixin,CreateView):
     form_class = postform
 
     model = post
+
+
+
+# @login_required
+# def createview(requests):
+#     # pub_post = get_object_or_404(post)
+#     if requests.method == 'POST':
+#         form = postform(requests.POST)
+#         if form.is_valid():
+#
+#             # comm = form.save(commit=False)
+#             # do not save the form just yet without linking to the 'post' model(foreign key has been specified)
+#             # comm.author = pub_post #connects the form with the rpost(foreign key)attribute in db
+#             # comm.save()
+#             # creator = requests.POST.get('author')
+#             # post.author = creator
+#             # post.save(update_fields='author')
+#             form.save()
+#             return redirect('post_detail')
+#     else:
+#         form = postform()
+#     return render(requests,'blog_app/post_form.html',{'form':form})
+
+
 
 class postupdateview(LoginRequiredMixin,UpdateView):
     login_url = '/login/'
@@ -69,7 +93,7 @@ def post_publish(requests,pk):
     # to access the model db create the object(pub_post) and specify the primary key(pk)
     pub_post = get_object_or_404(post,pk=pk)
     pub_post.publish() # this function is the one which saves the post info in the db
-    return redirect('blog_app/post_detail',pk=pk) # use the redirect function to redirect to the correct post with pk
+    return redirect('post_detail',pk=pk) # use the redirect function to redirect to the correct post with pk
 
 
 @login_required
