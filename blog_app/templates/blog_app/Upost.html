@@ -8,13 +8,15 @@
  {% for post in post_list%}
    <!-- in url tagging no need to specify the app name as all the links for the views are through the urls in blog_app -->
    <!-- specify the pk so that the respective post_detail is displayed -->
-   <h2><a href="{% url 'post_detail' pk=post.pk%}"></a>{{post.title}}</h2>
+   {% if user.username == post.creator %}
+   <h2><a href="{% url 'post_detail' pk=post.pk%}">{{post.title}}</a></h2>
    <div class="date">
-     <p>Created on:{{post.create_date|date:"D M Y"}}</p>
+     <p>Created on: {{post.create_date|date:"D M Y"}}</p>
    </div>
    <div>
      <!-- here for the Comments the approve_comments method is called and count attribute is applied so that it displays the no of comments for each post -->
      <a href="{% url 'post_detail' pk=post.pk%}">Comments: {{post.approve_comments.count}}</a>
    </div>
+   {% endif %}
  {% endfor %}
 {% endblock %}

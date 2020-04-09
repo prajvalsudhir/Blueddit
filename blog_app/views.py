@@ -185,7 +185,7 @@ def user_login(request):
                     login(request, user)
                     # Send the user back to some page.
                     # In this case their homepage.
-                    return render(request,'blog_app/post_list.html')
+                    return render(request,'blog_app/about.html')
                 else:
                     # If account is not active:
                     return HttpResponse("Your account is not active.")
@@ -207,10 +207,18 @@ def user_logout(request):
     return redirect('post_list')
 
 
-class upostlistview(LoginRequiredMixin,ListView):
-    model = post
+# class upostlistview(LoginRequiredMixin,ListView):
+#     model = post
+#
+#
+#     # this is a built in function in django to access the sql entries and manipulate them
+#     def get_queryset(self):
+#         return post.objects.filter(published_date__lte = timezone.now()).order_by('-create_date')
 
 
-    # this is a built in function in django to access the sql entries and manipulate them
-    def get_queryset(self):
-        return post.objects.filter(create_date__lte = timezone.now()).order_by('-create_date')
+# the posts of every individual user
+def upostview(requests):
+    mp = post.objects.filter(published_date__lte = timezone.now()).order_by('-create_date')
+    # mp = post.objects.all()
+    #mp = get_object_or_404(post)
+    return render(requests,'blog_app/Upost.html',{'post_list':mp})
