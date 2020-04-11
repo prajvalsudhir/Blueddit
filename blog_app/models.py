@@ -26,6 +26,7 @@ class post(models.Model):
     create_date = models.DateField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     creator = models.TextField(max_length=50)
+    photos = models.ImageField(upload_to='images/',blank=True,null=True,default='default.png') #django will automatically create the media folder and place the images
 
     def publish(self):
         self.published_date = timezone.now()
