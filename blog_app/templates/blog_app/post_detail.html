@@ -35,7 +35,11 @@
      {% endif %}
 
 <hr>
+{% if user.is_authenticated%}
 <a class="btn btn-primary btn-comment float-right" href="{% url 'add_comment' pk=post.pk %}">AddComment</a>
+{% else %}
+<a class="btn btn-primary btn-comment float-right" href="{% url 'user_login' %}">login to AddComment</a>
+{%endif%}
 
 <div class="container">
 
