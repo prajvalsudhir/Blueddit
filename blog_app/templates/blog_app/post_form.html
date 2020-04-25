@@ -4,13 +4,14 @@
 {% block body_block %}
 <h1>New post</h1>
 
-  <form method="POST" class="post-form" name="form">
+  <form method="POST" class="post-form" name="form" enctype="multipart/form-data">
   {% csrf_token %}
     <!-- {{form.as_p}} -->
   <h3>Creator<input readonly class="form-control" type="text" name="creator" value="{{user.username}}"></h3>
   <h3>Title<input class="form-control" type="text" name="title"></h3>
   <!-- <h3>Text<input class="form-control" type="text" name="text"></h3> -->
   <h3>Text<textarea  class="form-control" name="text" rows="10" cols="100"></textarea></h3>
+  <h3>Photo</h3><input type="file" name="photos" value="upload">
   <!-- <input type="submit" name="" value="Save" class="btn btn-warning"> -->
    <!-- <strong>Author:</strong><input type="text" name="author" value="{{user.username}}"> -->
    <hr>

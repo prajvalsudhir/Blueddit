@@ -153,6 +153,7 @@ def register(request):
         else:
             # One of the forms was invalid if this else gets called.
             print(user_form.errors)
+            return HttpResponse(str(user_form.errors))
 
     else:
         # Was not an HTTP post so we just render the forms as blank.

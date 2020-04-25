@@ -7,7 +7,7 @@ class postform(forms.ModelForm):
     class Meta():
         model = post
         #user should be only able to edit the title and text of the post
-        fields = ('creator','title','text')
+        fields = ('creator','title','text','photos')
         #adding some widgets to the fields for extra features like for editing the text on selecting it
         widgets = {
             # defining a class so that we can edit the css later
