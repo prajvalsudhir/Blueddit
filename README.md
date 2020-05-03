@@ -1,5 +1,5 @@
 # BLUEDDIT
-Deployed of python anywhere: http://prajvalsudhir.pythonanywhere.com/
+Deployed on python anywhere: http://prajvalsudhir.pythonanywhere.com/
 
 ![sample](https://upload.wikimedia.org/wikipedia/en/7/70/AlienBlue_Icon.png)
 
