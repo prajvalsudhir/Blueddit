@@ -3,7 +3,9 @@ Deployed on python anywhere: http://prajvalsudhir.pythonanywhere.com/
 
 ![sample](https://upload.wikimedia.org/wikipedia/en/7/70/AlienBlue_Icon.png)
 
-A Reddit like clone website built using python and Django framework
+A micro-blogging website built using python and Django framework.
+
+CRUD operations, Registration and login features are also implemented.
 
 Frontend of the website built using Bootstrap and some custom css
 
