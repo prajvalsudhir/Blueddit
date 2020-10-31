@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block body_block %}
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
 <!-- <link rel="stylesheet" href="C:\Users\prajv\Desktop\PycharmProjects\PS-PY\venv\djenv\blog_pro\blog_app\static\css\login.css"> -->
@@ -22,68 +22,69 @@
 
 <!-- navbar code -->
 <header>
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <img class="logo"src="{% static 'images/reddit.png'%}" alt="">
-<a class="navbar-brand" href="{%url 'about'%}">Blueddit</a>
-<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
-<div class="navbar-collapse collapse" id="navbarCollapse" style="">
-    <ul class="navbar-nav ml-auto py-4 py-md-0">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+    <img class="logo"src="{% static 'images/reddit.png'%}" alt="">
+    <a class="navbar-brand" href="{% url 'about' %}">Blueddit</a>
+    <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbarCollapse" style="">
 
-      <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-        <div class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle active" href="#" id="navbar-dropdown-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            HOME
-          </a>
-            <div class="dropdown-menu" aria-labelledby="navbar-dropdown-menu">
-          <a class="dropdown-item" href="{%url 'about' %}">About</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-          <a class="dropdown-item" href="#">Another action</a>
-        </div>
-      </div>
-      </li>
-      <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-        <a class="nav-link" href="{% url 'post_list'%}">POSTS</a>
-      </li>
-      <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-        <div class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle active" href="#" id="navbar-dropdown-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Contact
-          </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="https://github.com/prajvalsudhir">Github</a>
-          <a class="dropdown-item" href="https://in.linkedin.com/in/prajval-sudhir-571833185">LinkedIn</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-          <a class="dropdown-item" href="#">Another action</a>
-        </div>
-      </div>
-      </li>
-      {% if user.is_authenticated %}
-      <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-        <a class="nav-link" href="{% url 'post_create' %}">NewPost</a>
-      </li>
-      <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-        <a class="nav-link" href="{%url 'Ulist' %}">My Posts</a>
-      </li>
-      <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-      <a class="nav-link" href="{% url 'user_logout' %}">Logout</a>
-      </li>
-      <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-      <strong><a class="nav-link" >Welcome: {{ user.username }}</a></strong>
-      </li>
-      {% else %}
-      <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-        <a class="nav-link" href="{% url 'register' %}">Register</a>
-        </li>
-      <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-        <a class="nav-link" href="{% url 'user_login' %}" aria-label="Login">Login</a>
-        </li>
-      {% endif %}
-  </ul>
+        <ul class="navbar-nav ml-auto py-md-0">
 
-</div>
-</nav>
+          <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+            <div class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="navbar-dropdown-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                HOME
+              </a>
+                <div class="dropdown-menu" aria-labelledby="navbar-dropdown-menu">
+              <a class="dropdown-item" href="{%url 'about' %}">About</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="#">Another action</a>
+            </div>
+          </div>
+          </li>
+            <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+            <a class="nav-link" href="{% url 'post_list'%}">POSTS</a>
+          </li>
+              <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+            <div class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="navbar-dropdown-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Contact
+              </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="https://github.com/prajvalsudhir">Github</a>
+              <a class="dropdown-item" href="https://in.linkedin.com/in/prajval-sudhir-571833185">LinkedIn</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="#">Another action</a>
+            </div>
+          </div>
+          </li>
+          {% if user.is_authenticated %}
+              <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+            <a class="nav-link" href="{% url 'post_create' %}">NewPost</a>
+          </li>
+            <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+            <a class="nav-link" href="{%url 'Ulist' %}">My Posts</a>
+          </li>
+            <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+          <a class="nav-link" href="{% url 'user_logout' %}">Logout</a>
+          </li>
+            <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+          <strong><a class="nav-link" >Welcome: {{ user.username }}</a></strong>
+          </li>
+          {% else %}
+              <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+              <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+            <a class="nav-link" href="{% url 'user_login' %}" aria-label="Login">Login</a>
+            </li>
+          {% endif %}
+      </ul>
+
+    </div>
+  </nav>
 </header>
 
 <!-- ##################################### -->
