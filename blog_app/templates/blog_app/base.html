@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <title>Blueddit</title>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -22,7 +24,7 @@
     <!-- medium style editor -->
     <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
-
+   <script src="https://cdnjs.com/libraries/bodymovin" type="text/javascript"></script>
     <!-- Fonts -->
     <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat|Russo+One" rel="stylesheet"> -->
 
@@ -32,68 +34,69 @@
 	<!-- <div class="navigation-wrap bg-light start-header start-style"> -->
 		<!-- <div class="container"> -->
     <header>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <img class="logo"src="{% static 'images/reddit.png'%}" alt="">
-    <a class="navbar-brand" href="{%url 'about'%}">Blueddit</a>
-    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-collapse collapse" id="navbarCollapse" style="">
-        <ul class="navbar-nav ml-auto py-4 py-md-0">
+      <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+        <img class="logo"src="{% static 'images/reddit.png'%}" alt="">
+        <a class="navbar-brand" href="{%url 'about' %}">Blueddit</a>
+        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbarCollapse" style="">
 
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-            <div class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active" href="#" id="navbar-dropdown-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                HOME
-              </a>
-                <div class="dropdown-menu" aria-labelledby="navbar-dropdown-menu">
-              <a class="dropdown-item" href="{%url 'about' %}">About</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <a class="dropdown-item" href="#">Another action</a>
-            </div>
-          </div>
-          </li>
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-            <a class="nav-link" href="{% url 'post_list'%}">POSTS</a>
-          </li>
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-            <div class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active" href="#" id="navbar-dropdown-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Contact
-              </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="https://github.com/prajvalsudhir">Github</a>
-              <a class="dropdown-item" href="https://in.linkedin.com/in/prajval-sudhir-571833185">LinkedIn</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <a class="dropdown-item" href="#">Another action</a>
-            </div>
-          </div>
-          </li>
-          {% if user.is_authenticated %}
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-            <a class="nav-link" href="{% url 'post_create' %}">NewPost</a>
-          </li>
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-            <a class="nav-link" href="{%url 'Ulist' %}">My Posts</a>
-          </li>
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-          <a class="nav-link" href="{% url 'user_logout' %}">Logout</a>
-          </li>
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-          <strong><a class="nav-link" >Welcome: {{ user.username }}</a></strong>
-          </li>
-          {% else %}
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-            <a class="nav-link" href="{% url 'register' %}">Register</a>
-            </li>
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-            <a class="nav-link" href="{% url 'user_login' %}" aria-label="Login">Login</a>
-            </li>
-          {% endif %}
-      </ul>
+            <ul class="navbar-nav ml-auto py-md-0">
 
-    </div>
-  </nav>
+              <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+                <div class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle active" href="#" id="navbar-dropdown-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    HOME
+                  </a>
+                    <div class="dropdown-menu" aria-labelledby="navbar-dropdown-menu">
+                  <a class="dropdown-item" href="{%url 'about' %}">About</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                </div>
+              </div>
+              </li>
+                <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+                <a class="nav-link" href="{% url 'post_list'%}">FEED</a>
+              </li>
+                  <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+                <div class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle active" href="#" id="navbar-dropdown-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Contact
+                  </a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="https://github.com/prajvalsudhir">Github</a>
+                  <a class="dropdown-item" href="https://in.linkedin.com/in/prajval-sudhir-571833185">LinkedIn</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                </div>
+              </div>
+              </li>
+              {% if user.is_authenticated %}
+                  <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+                <a class="nav-link" href="{% url 'post_create' %}">NewPost</a>
+              </li>
+                <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+                <a class="nav-link" href="{%url 'Ulist' %}">My Posts</a>
+              </li>
+                <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+              <a class="nav-link" href="{% url 'user_logout' %}">Logout</a>
+              </li>
+                <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+              <strong><a class="nav-link" >Welcome: {{ user.username }}</a></strong>
+              </li>
+              {% else %}
+                  <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+                  <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+                <a class="nav-link" href="{% url 'user_login' %}" aria-label="Login">Login</a>
+                </li>
+              {% endif %}
+          </ul>
+
+        </div>
+      </nav>
 </header>
 
 
@@ -124,6 +127,6 @@
       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
             <script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.4/dist/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
 
-    
+
   </body>
 </html>

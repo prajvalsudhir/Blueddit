@@ -18,6 +18,7 @@
    <div>
      <!-- here for the Comments the approve_comments method is called and count attribute is applied so that it displays the no of comments for each post -->
      <a class="list_link2" href="{% url 'post_detail' pk=post.pk%}">Comments: {{post.approve_comments.count}}</a>
+<!--     <a href="#">Likes : {#{post.approved_likes.count}#}</a>-->
      <hr>
    </div>
  {% endfor %}

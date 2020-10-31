@@ -8,6 +8,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -19,16 +20,17 @@
   </body>
   <body>
     <header>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-     <img class="logo"src="{% static 'images/reddit.png'%}" alt="">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+    <img class="logo"src="{% static 'images/reddit.png'%}" alt="">
     <a class="navbar-brand" href="#">Blueddit</a>
-    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-collapse collapse" id="navbarCollapse" style="">
-        <ul class="navbar-nav ml-auto py-4 py-md-0">
 
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+        <ul class="navbar-nav ml-auto py-md-0">
+
+          <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
             <div class="nav-item dropdown">
               <a class="nav-link dropdown-toggle active" href="#" id="navbar-dropdown-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 HOME
@@ -40,10 +42,10 @@
             </div>
           </div>
           </li>
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-            <a class="nav-link" href="{% url 'post_list'%}">POSTS</a>
+            <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+            <a class="nav-link" href="{% url 'post_list'%}">FEED</a>
           </li>
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+              <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
             <div class="nav-item dropdown">
               <a class="nav-link dropdown-toggle active" href="#" id="navbar-dropdown-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Contact
@@ -57,23 +59,23 @@
           </div>
           </li>
           {% if user.is_authenticated %}
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+              <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
             <a class="nav-link" href="{% url 'post_create' %}">NewPost</a>
           </li>
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+            <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
             <a class="nav-link" href="{%url 'Ulist' %}">My Posts</a>
           </li>
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+            <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
           <a class="nav-link" href="{% url 'user_logout' %}">Logout</a>
           </li>
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+            <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
           <strong><a class="nav-link" >Welcome: {{ user.username }}</a></strong>
           </li>
           {% else %}
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+              <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
             <a class="nav-link" href="{% url 'register' %}">Register</a>
             </li>
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+              <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
             <a class="nav-link" href="{% url 'user_login' %}" aria-label="Login">Login</a>
             </li>
           {% endif %}
@@ -110,9 +112,20 @@
         <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg>
         <div class="container">
           <div class="carousel-caption">
+            {% if user.is_authenticated %}
+            <h1>New Post</h1>
+            <p>Do you want to share something new?</p>
+            <p><a class="btn btn-lg btn-primary" href="{% url 'post_create'%}" role="button">Create a New Post</a></p>
+
+            {% else %}
+
+
             <h1>Login</h1>
             <p>If you already have an account then login and get started</p>
             <p><a class="btn btn-lg btn-primary" href="{%url 'user_login'%}" role="button">Login</a></p>
+            {% endif %}
+
+
           </div>
         </div>
       </div>
@@ -122,9 +135,19 @@
         <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg>
         <div class="container">
           <div class="carousel-caption text-right">
+            {% if user.is_authenticated %}
+
+            <h1>Welcome {{user.username}}</h1>
+            <p>This is my reddit clone website</p>
+            <p><a class="btn btn-lg btn-primary" href="{% url 'post_list'%}" role="button">Check your FEED</a></p>
+
+            {% else %}
+
             <h1>Welcome</h1>
             <p>This is my reddit clone website</p>
             <p><a class="btn btn-lg btn-primary" href="{% url 'register'%}" role="button">Sign up today</a></p>
+
+            {% endif %}
           </div>
         </div>
       </div>
@@ -177,12 +200,12 @@
     <hr class="featurette-divider">
 
     <div class="row featurette">
-      <div class="col-md-7">
+      <div class="col-lg-6">
         <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
         <p class="lead">Creation of multiple user accounts so that anyone and everyone can post their stories!</p>
       </div>
-      <div class="col-md-5">
-        <img src="https://cdn.onlinewebfonts.com/svg/img_76872.png" alt="" width="350" height="350">
+      <div class="col-lg-4">
+        <img src="{% static 'images/first_featureatte.png' %}" alt="" width="350" height="350">
         <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
       </div>
     </div>
@@ -190,12 +213,12 @@
     <hr class="featurette-divider">
 
     <div class="row featurette">
-      <div class="col-md-7 order-md-2">
+      <div class="col-lg-6 order-lg-2">
         <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
         <p class="lead">Users can create as many posts as they want with unlimited word count enabled and also leave comments to every post.</p>
       </div>
-      <div class="col-md-5 order-md-1">
-        <img src="https://cdn4.iconfinder.com/data/icons/proglyphs-editor/512/Perex-512.png" alt="" width="350" height="350">
+      <div class="col-lg-4 order-md-1">
+        <img src="{% static 'images/second_featureatte.png' %}" alt="" width="350" height="350">
         <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
       </div>
     </div>
@@ -203,12 +226,12 @@
     <hr class="featurette-divider">
 
     <div class="row featurette">
-      <div class="col-md-7">
+      <div class="col-lg-6">
         <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
         <p class="lead">Users can include images in their posts,Edit or delete their posts and Remove unwanted comments.</p>
       </div>
-      <div class="col-md-5">
-        <img src="https://img.pngio.com/gallery-icon-png-images-vector-and-psd-files-free-download-on-gallery-icon-png-512_512.png" alt="" width="350" height="350">
+      <div class="col-lg-4">
+        <img src="{% static 'images/third_featureatte.png' %}" alt="" width="350" height="350">
         <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
       </div>
     </div>

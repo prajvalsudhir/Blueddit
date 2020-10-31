@@ -8,7 +8,7 @@ from django.views.generic import (TemplateView,
 from .models import post,comment,userinfo
 from .forms import postform,commentform,userform
 # import reverse lazy to specify that the page should redirect only after deleting the post and not before it otherwise
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy,reverse
 # import mixin,which is similar to decorators(login_required) but can be used for class based views
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
@@ -31,6 +31,14 @@ class postlistview(ListView):
 
 class postdetailview(DetailView):
     model = post
+
+    def get_context_data(self, *args ,**kwargs):
+        context = super(postdetailview,self).get_context_data(*args,**kwargs)
+        post_stuff = get_object_or_404(post,id=self.kwargs['pk'])
+        total_likes = post_stuff.approved_likes()
+        context['total_likes'] = total_likes
+        return context
+
 
 
 # # login required mixin is used so only users logged in can create posts
@@ -121,6 +129,15 @@ def com_reject(requests,pk):
     post_pk = com_post.rpost.pk #rpost(foreignkey attribute),access this attribute to link up to the post
     com_post.reject()
     return redirect('post_detail',pk=post_pk)
+
+
+
+@login_required()
+def like_view(requests,pk):
+    post_obj = get_object_or_404(post,id=requests.POST.get('post_id'))
+    post_obj.likes.add(requests.user)
+    return HttpResponseRedirect(reverse('post_detail',args=[int(pk)]))
+
 
 
 def register(request):

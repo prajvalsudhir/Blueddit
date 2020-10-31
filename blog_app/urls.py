@@ -16,7 +16,7 @@ urlpatterns = [
     path('post/<int:pk>/comment/',views.add_comment,name='add_comment'),
     #use the comment path to specify which comment has to be rejected
     path('comment/<int:pk>/reject/',views.com_reject,name='com_reject'),
-
+    path('like/<int:pk>',views.like_view,name='like_post'),
    path('post/Upost/',views.upostview,name='Ulist'),#post list for the individual user
 
     # path('post/create',views.createview,name='post_create'),
