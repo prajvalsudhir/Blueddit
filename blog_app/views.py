@@ -5,7 +5,7 @@ from django.views.generic import (TemplateView,
                                   ListView,DetailView,CreateView,
                                   UpdateView,DeleteView)
 
-from .models import post,comment,userinfo
+from .models import post,comment,userinfo,User,follower
 from .forms import postform,commentform,userform
 # import reverse lazy to specify that the page should redirect only after deleting the post and not before it otherwise
 from django.urls import reverse_lazy,reverse
@@ -140,6 +140,41 @@ def like_view(requests,pk):
 
 
 
+@login_required()
+def follow_view(requests):
+    user_list = User.objects.exclude(id=requests.user.id)
+    fol_list = []
+    fol = follower.objects.get_or_create(uid=requests.user)  ## this method gets the object with uid=requests.user from followers model if it exists else it will create a new uid object
+    fol_list = fol[0].fid.all()     ## above method returns a tuple with (follower_object,created) where created is a boolean value
+
+    if requests.method == 'POST':
+        # new_follower = get_object_or_404(User,id=requests.POST.get('follow_id'))
+        new_follower = requests.POST.get('follow_id')
+        follower.follow_me(requests.user,new_follower)
+        return redirect('follow_user')
+    else:
+        return render(requests,'blog_app/followers.html',{'user_list':user_list,'follow_list':fol_list})
+
+
+@login_required()
+def unfollow_view(requests):
+    user_list = User.objects.exclude(id=requests.user.id)
+    fol_list = []
+    fol = follower.objects.get_or_create(uid=requests.user)  ## this method gets the object with uid=requests.user from followers model if it exists else it will create a new uid object
+    fol_list = fol[0].fid.all()     ## above method returns a tuple with (follower_object,created) where created is a boolean value
+
+    if requests.method == 'POST':
+        # new_follower = get_object_or_404(User,id=requests.POST.get('follow_id'))
+        del_follower = requests.POST.get('unfollow_id')
+        follower.unfollow_me(requests.user,del_follower)
+        return redirect('follow_user')
+    else:
+        return render(requests,'blog_app/followers.html',{'user_list':user_list,'follow_list':fol_list})
+
+
+
+
+
 def register(request):
     registered = False
 
@@ -240,3 +275,11 @@ def upostview(requests):
     # mp = post.objects.all()
     #mp = get_object_or_404(post)
     return render(requests,'blog_app/Upost.html',{'post_list':mp})
+
+
+def fol_post_view(requests):
+    fol = follower.objects.get(uid=requests.user)
+    fol_list = fol.fid.all()
+    post_list = post.objects.filter(published_date__lte = timezone.now()).order_by('-create_date')
+    return render(requests,'blog_app/fol_post.html',{'fol_list':fol_list,'post_list':post_list})
+

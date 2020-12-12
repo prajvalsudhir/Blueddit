@@ -30,20 +30,8 @@
 
         <ul class="navbar-nav ml-auto py-md-0">
 
-          <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
-            <div class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active" href="#" id="navbar-dropdown-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                HOME
-              </a>
-                <div class="dropdown-menu" aria-labelledby="navbar-dropdown-menu">
-              <a class="dropdown-item" href="{%url 'about' %}">About</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <a class="dropdown-item" href="#">Another action</a>
-            </div>
-          </div>
-          </li>
             <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
-            <a class="nav-link" href="{% url 'post_list'%}">FEED</a>
+            <a class="nav-link" href="{% url 'post_list'%}">Main Feed</a>
           </li>
               <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
             <div class="nav-item dropdown">
@@ -62,9 +50,20 @@
               <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
             <a class="nav-link" href="{% url 'post_create' %}">NewPost</a>
           </li>
-            <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
-            <a class="nav-link" href="{%url 'Ulist' %}">My Posts</a>
+          <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+        <a class="nav-link" href="{% url 'follow_user' %}">Follow users</a>
           </li>
+          <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" id="navbar-dropdown-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            POSTS
+          </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{% url 'follow_post'%}">Following Posts</a>
+          <a class="dropdown-item" href="{%url 'Ulist' %}">My Posts</a>
+        </div>
+        </div>
+        </li>
             <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
           <a class="nav-link" href="{% url 'user_logout' %}">Logout</a>
           </li>
@@ -138,8 +137,8 @@
             {% if user.is_authenticated %}
 
             <h1>Welcome {{user.username}}</h1>
-            <p>This is my reddit clone website</p>
-            <p><a class="btn btn-lg btn-primary" href="{% url 'post_list'%}" role="button">Check your FEED</a></p>
+            <p>Check out your personal feed</p>
+            <p><a class="btn btn-lg btn-primary" href="{% url 'follow_post'%}" role="button">Check your FEED</a></p>
 
             {% else %}
 
@@ -202,7 +201,7 @@
     <div class="row featurette">
       <div class="col-lg-6">
         <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-        <p class="lead">Creation of multiple user accounts so that anyone and everyone can post their stories!</p>
+        <p class="lead">Join us and start connecting with your friends today</p>
       </div>
       <div class="col-lg-4">
         <img src="{% static 'images/first_featureatte.png' %}" alt="" width="350" height="350">
@@ -215,7 +214,7 @@
     <div class="row featurette">
       <div class="col-lg-6 order-lg-2">
         <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-        <p class="lead">Users can create as many posts as they want with unlimited word count enabled and also leave comments to every post.</p>
+        <p class="lead">Users can create as many posts as they want with unlimited word count enabled and also Like and comment on any post.</p>
       </div>
       <div class="col-lg-4 order-md-1">
         <img src="{% static 'images/second_featureatte.png' %}" alt="" width="350" height="350">

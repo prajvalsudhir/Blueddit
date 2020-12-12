@@ -5,7 +5,9 @@
 <h1>New comment</h1>
    <form method="POST" class="post-form">
    {% csrf_token %}
-   <h4>{{form.as_p}}</h4>
+   <h4>USER ID:<input readonly class="form-control" type="number" name="user_id" value="{{user.id}}"></h4>
+   <h3>USERNAME<input readonly class="form-control" type="text" name="username" value="{{user.username}}"></h3>
+   <h3>Text<textarea  class="form-control" name="text" rows="10" cols="100"></textarea></h3>
    <button type="submit" class="btn btn-warning save">Post Comment</button>
    </form>
 

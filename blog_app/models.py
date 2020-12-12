@@ -57,7 +57,8 @@ class post(models.Model):
 class comment(models.Model):
     # rpost has foreignkey blog.post linking the post model in the blog app so that post has respective comments.related_name is set to manipulate in post model
     rpost = models.ForeignKey('blog_app.post',related_name='comments',on_delete=models.CASCADE,null=True)
-    author = models.CharField(max_length=200)
+    user_id = models.ForeignKey(User,on_delete=models.CASCADE)
+    username = models.CharField(max_length=200)
     text = models.TextField()
     create_date = models.DateField(default=timezone.now)
     # here the approved_comm is set to true while creating the comment and can be changed by the post user
@@ -73,6 +74,28 @@ class comment(models.Model):
 #to get the string representation of the model
     def __str__(self):
         return self.text
+
+
+class follower(models.Model):
+    uid = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    fid = models.ManyToManyField(User,related_name='follower_id',blank=True)
+
+    def __str__(self):
+        return self.uid.username
+
+    @classmethod
+    def follow_me(cls,uid,new_follower):
+        foll, created = cls.objects.get_or_create(uid=uid)
+        foll.fid.add(new_follower)
+
+    @classmethod
+    def unfollow_me(cls,uid,new_follower):
+        foll, created = cls.objects.get_or_create(uid=uid)
+        foll.fid.remove(new_follower)
+
+
+
+
 
 
 
@@ -94,17 +117,6 @@ class comment(models.Model):
 #     def __str__(self):
 #         return self.plikes.title
 
-
-#
-# class userinfo(models.Model):
-#     # we are creating this user field to have a 1-1 mapping for individual users and their profile pic and bio
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#
-#     def get_absolute_url(self):
-#         return reverse('Upost_list', kwargs={'pk': self.pk})
-#
-#     def __str__(self):
-#         return self.user.username
 
 
 

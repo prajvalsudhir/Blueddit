@@ -24,11 +24,10 @@
    <!-- add a filter to the post so that only the text content is displayed(because of the medium functionality) -->
     <p class='postcontent' >{{ post.text|safe|linebreaksbr }}</p>
   <div class="row">
-  <div class="col-lg-4 col-6">
+  <div class="col-lg-12 col-12">
   <!-- the images are automatically retreived from the meda folder according to the post -->
-    <img src="{{post.photos.url}}" alt="" height="400" width="640">
 
-
+    <img src="{{post.photos.url}}" alt="" height="480" width="640" class="img-fluid">
 
 <!-- Likes button -->
      <hr>
@@ -67,6 +66,7 @@
 
 <hr>
 {% if user.is_authenticated%}
+
 <a class="btn btn-primary btn-comment float-right" href="{% url 'add_comment' pk=post.pk %}">AddComment</a>
 {% else %}
 <a class="btn btn-primary btn-comment float-right" href="{% url 'user_login' %}">login to AddComment</a>
@@ -83,7 +83,7 @@
              {{ comm.create_date }}
 
          <p>{{ comm.text|safe|linebreaks }}</p>
-         <p>Posted by: <strong>{{ comm.author }}</strong></p>
+         <p>Posted by: <strong>{{ comm.username }}</strong></p>
 
      {% endif %}
      <!-- making sure only the post creators can remove the comments -->
