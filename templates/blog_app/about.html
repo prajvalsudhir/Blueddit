@@ -1,0 +1,257 @@
+{#% extends 'blog_app/base.html'%#}
+
+
+{% block body_block %}
+
+<!DOCTYPE html>
+{%load static%}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="new.css">
+    <link rel="stylesheet" href="{% static 'css/new.css'%}">
+    <title></title>
+  </head>
+  <body>
+  </body>
+  <body>
+    <header>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+    <img class="logo"src="{% static 'images/reddit.png'%}" alt="">
+    <a class="navbar-brand" href="#">Blueddit</a>
+    <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbarCollapse" style="">
+
+        <ul class="navbar-nav ml-auto py-md-0">
+
+            <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+            <a class="nav-link" href="{% url 'post_list'%}">Main Feed</a>
+          </li>
+              <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+            <div class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="navbar-dropdown-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Contact
+              </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="https://github.com/prajvalsudhir">Github</a>
+              <a class="dropdown-item" href="https://in.linkedin.com/in/prajval-sudhir-571833185">LinkedIn</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="#">Another action</a>
+            </div>
+          </div>
+          </li>
+          {% if user.is_authenticated %}
+              <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+            <a class="nav-link" href="{% url 'post_create' %}">NewPost</a>
+          </li>
+          <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+        <a class="nav-link" href="{% url 'follow_user' %}">Follow users</a>
+          </li>
+          <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" id="navbar-dropdown-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            POSTS
+          </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{% url 'follow_post'%}">Following Posts</a>
+          <a class="dropdown-item" href="{%url 'Ulist' %}">My Posts</a>
+        </div>
+        </div>
+        </li>
+            <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+          <a class="nav-link" href="{% url 'user_logout' %}">Logout</a>
+          </li>
+            <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+          <strong><a class="nav-link" >Welcome: {{ user.username }}</a></strong>
+          </li>
+          {% else %}
+              <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+              <li class="nav-item pl-4 pl-md-0 ml-0 ml-lg-4 active">
+            <a class="nav-link" href="{% url 'user_login' %}" aria-label="Login">Login</a>
+            </li>
+          {% endif %}
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+<main role="main">
+
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+      <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+      <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item carousel-item-next">
+        <img src="{% static 'images/firewatch-night-widescreen-wallpaper.jpg'%}" alt="">
+        <img src="C:\Users\prajv\Downloads\firewatch-night-widescreen-wallpaper.jpg" alt="">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg>
+        <div class="container">
+          <div class="carousel-caption text-left">
+            <h1>POSTS</h1>
+            <p>Check out all the posts!</p>
+            <p><a class="btn btn-lg btn-primary" href="{% url 'post_list'%}" role="button">Posts</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item active carousel-item-next carousel-item-left">
+        <img src="{% static 'images/tron.jpg'%}" alt="">
+        <img src="C:\Users\prajv\Downloads\tron.jpg" alt="">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg>
+        <div class="container">
+          <div class="carousel-caption">
+            {% if user.is_authenticated %}
+            <h1>New Post</h1>
+            <p>Do you want to share something new?</p>
+            <p><a class="btn btn-lg btn-primary" href="{% url 'post_create'%}" role="button">Create a New Post</a></p>
+
+            {% else %}
+
+
+            <h1>Login</h1>
+            <p>If you already have an account then login and get started</p>
+            <p><a class="btn btn-lg btn-primary" href="{%url 'user_login'%}" role="button">Login</a></p>
+            {% endif %}
+
+
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item carousel-item-next carousel-item-left">
+        <img src="{% static 'images/neon.jpg'%}" alt="">
+        <img src="C:\Users\prajv\Downloads\neon.jpg" alt="">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg>
+        <div class="container">
+          <div class="carousel-caption text-right">
+            {% if user.is_authenticated %}
+
+            <h1>Welcome {{user.username}}</h1>
+            <p>Check out your personal feed</p>
+            <p><a class="btn btn-lg btn-primary" href="{% url 'follow_post'%}" role="button">Check your FEED</a></p>
+
+            {% else %}
+
+            <h1>Welcome</h1>
+            <p>This is my reddit clone website</p>
+            <p><a class="btn btn-lg btn-primary" href="{% url 'register'%}" role="button">Sign up today</a></p>
+
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+
+  <!-- Marketing messaging and featurettes
+  ================================================== -->
+  <!-- Wrap the rest of the page in another container to center all the content. -->
+
+  <div class="container marketing">
+
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+      <div class="col-lg-4">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png" alt="" width="140" height="140">
+        <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg> -->
+        <h2>Python</h2>
+        <p>Backend of the website built using Python with the Django framework. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+        <p><a class="btn btn-secondary" href="https://www.python.org/" role="button">View details »</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img src="https://cdn2.hubspot.net/hubfs/3885898/django.png" alt="" width="140" height="140">
+        <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg> -->
+        <h2>Django</h2>
+        <p>A powerful Backend framework for quickly developing websites with top security features. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo.</p>
+        <p><a class="btn btn-secondary" href="https://www.djangoproject.com/" role="button">View details »</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img src="https://sdtimes.com/wp-content/uploads/2018/01/bootstrap-stack.png" alt="" width="140" height="140">
+        <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg> -->
+        <h2>Bootstrap 4</h2>
+        <p>The frontend part of the website is developed with bootstrap with some custom css. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo.</p>
+        <p><a class="btn btn-secondary" href="https://getbootstrap.com/" role="button">View details »</a></p>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+
+    <!-- START THE FEATURETTES -->
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-lg-6">
+        <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
+        <p class="lead">Join us and start connecting with your friends today</p>
+      </div>
+      <div class="col-lg-4">
+        <img src="{% static 'images/first_featureatte.png' %}" alt="" width="350" height="350">
+        <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-lg-6 order-lg-2">
+        <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
+        <p class="lead">Users can create as many posts as they want with unlimited word count enabled and also Like and comment on any post.</p>
+      </div>
+      <div class="col-lg-4 order-md-1">
+        <img src="{% static 'images/second_featureatte.png' %}" alt="" width="350" height="350">
+        <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-lg-6">
+        <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+        <p class="lead">Users can include images in their posts,Edit or delete their posts and Remove unwanted comments.</p>
+      </div>
+      <div class="col-lg-4">
+        <img src="{% static 'images/third_featureatte.png' %}" alt="" width="350" height="350">
+        <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <!-- /END THE FEATURETTES -->
+
+  </div><!-- /.container -->
+
+
+  <!-- FOOTER -->
+  <footer class="container">
+    <p class="float-right"><a href="#">Back to top</a></p>
+    <p>© Website created and owned by <a href="https://in.linkedin.com/in/prajval-sudhir-571833185">Prajval</a> · <a href="#">Terms</a></p>
+  </footer>
+</main>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.4/dist/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+{% endblock %}

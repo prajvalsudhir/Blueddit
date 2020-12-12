@@ -1,0 +1,27 @@
+{% extends 'blog_app/base.html'%}
+
+{%block body_block %}
+
+{% for userl in user_list%}
+
+  {% if userl in follow_list%}
+
+  <form class="" action="{% url 'unfollow_user' %}" method="POST">
+   {% csrf_token %}
+   <h2>{{userl.username}} <button type="submit" name="unfollow_id" value="{{ userl.id }}" class="btn btn-info float-right">FOLLOWING</button> </h2>
+   <hr>
+   <p></p>
+    </form>
+
+   {% else %}
+   <form class="" action="{% url 'follow_user' %}" method="POST">
+      {% csrf_token %}
+     <h2>{{userl.username}} <button type="submit" name="follow_id" class="btn btn-outline-info float-right" value="{{ userl.id }}">FOLLOW</button> </h2>
+     <hr>
+     <p></p>
+
+  </form>
+  {% endif %}
+{%endfor%}
+
+{% endblock %}
